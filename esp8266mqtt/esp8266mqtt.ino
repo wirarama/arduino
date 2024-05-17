@@ -1,16 +1,16 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
  
-const char* ssid = "YourNetworkName";
-const char* password =  "YourNetworkPassword";
-const char* mqttServer = "m11.cloudmqtt.com";
-const int mqttPort = 12948;
-const char* mqttUser = "YourMqttUser";
-const char* mqttPassword = "YourMqttUserPassword";
+const char* ssid = "ssid";
+const char* password =  "password";
+const char* mqttServer = "ipbroker";
+const int mqttPort = 1883;
+const char* mqttUser = "";
+const char* mqttPassword = "";
+int i = 0;
  
 WiFiClient espClient;
 PubSubClient client(espClient);
- 
 void setup() {
  
   Serial.begin(115200);
@@ -42,9 +42,9 @@ void setup() {
     }
   }
  
-  client.publish("esp/test", "Hello from ESP8266");
-  client.subscribe("esp/test");
- 
+  client.publish("test", "Hello from ESP8266");
+  client.subscribe("test");
+  
 }
  
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -64,4 +64,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
  
 void loop() {
   client.loop();
+  client.publish("test",(const char*)i);
+  i = i+1;
+  delay(2000);
 }

@@ -24,7 +24,7 @@ if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
  
 HTTPClient http;  //Declare an object of class HTTPClient
  
-http.begin("http://192.168.88.253/mine/iot/test.php?p="+String(out));  //Specify request destination
+http.begin("http://192.168.88.253/mine/iot/test.php?suhu="+String(out)+"&kelembaban="+String(out));  //Specify request destination
 int httpCode = http.GET();                                                                  //Send the request
 if(out==2){
   out=1; 
