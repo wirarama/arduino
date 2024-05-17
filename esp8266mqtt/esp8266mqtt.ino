@@ -64,7 +64,10 @@ void callback(char* topic, byte* payload, unsigned int length) {
  
 void loop() {
   client.loop();
+  String kirim = (String)i+","+(String)i;
+  const char * c = kirim.c_str();
   client.publish("test",(const char*)i);
+  client.publish("test",c);
   i = i+1;
   delay(2000);
 }
